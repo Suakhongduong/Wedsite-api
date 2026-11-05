@@ -2,7 +2,6 @@ package com.example.wedsite_api;
 
 import com.example.wedsite_api.model.ValorantCharacter;
 import com.example.wedsite_api.service.ValorantCharacterService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -13,16 +12,25 @@ import java.util.List;
 @Controller
 public class ValorantViewController {
 
-    @Autowired
-    private ValorantCharacterService characterService;
+    private final ValorantCharacterService characterService;
 
-    // 1. Gallery Page (Trang chủ) + Search & Filter
+    public ValorantViewController(ValorantCharacterService characterService) {
+        this.characterService = characterService;
+    }
+
+    // 1. Gallery Page + Search & Filter
     @GetMapping("/")
     public String getAllCharacters(@RequestParam(required = false) String name,
                                   @RequestParam(required = false) String role,
                                   Model model) {
-        List<ValorantCharacter> characters = characterService.getAllCharacters();
-        
+        List<ValorantCharacter> characters;
+        try {
+            characters = characterService.getAllCharacters();
+        } catch (Exception e) {
+            characters = List.of();
+            model.addAttribute("errorMessage", "Database connection failed. Please check datasource configuration.");
+        }
+
         if (name != null && !name.trim().isEmpty()) {
             characters = characters.stream()
                     .filter(c -> c.getName() != null && c.getName().toLowerCase().contains(name.toLowerCase().trim()))
@@ -35,20 +43,24 @@ public class ValorantViewController {
         }
 
         model.addAttribute("characters", characters);
-        model.addAttribute("searchName", name);
-        model.addAttribute("searchRole", role);
+        model.addAttribute("search", name);
+        model.addAttribute("role", role);
         return "index";
     }
 
     // 2. Details Page
     @GetMapping("/characters/{id}")
     public String getCharacterDetails(@PathVariable Long id, Model model) {
-        ValorantCharacter character = characterService.getCharacterById(id).orElse(null);
-        if (character == null) {
-            return "redirect:/?error=NotFound";
+        try {
+            ValorantCharacter character = characterService.getCharacterById(id).orElse(null);
+            if (character == null) {
+                return "redirect:/?error=NotFound";
+            }
+            model.addAttribute("character", character);
+            return "details";
+        } catch (Exception e) {
+            return "redirect:/?error=DatabaseUnavailable";
         }
-        model.addAttribute("character", character);
-        return "details";
     }
 
     // 3. About Page

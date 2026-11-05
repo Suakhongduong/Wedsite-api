@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-            <a class="navbar-brand" href="index.html">VALORANT PROTOCOL</a>
+            <a class="navbar-brand" href="index.ftlh">VALORANT PROTOCOL</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
