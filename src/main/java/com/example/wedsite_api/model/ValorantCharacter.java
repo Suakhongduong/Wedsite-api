@@ -23,14 +23,16 @@ public class ValorantCharacter {
 
     private String role;
     private String origin;
+    private String imageUrl;
 
     public ValorantCharacter() {}
 
-    public ValorantCharacter(String name, String description, String role, String origin) {
+    public ValorantCharacter(String name, String description, String role, String origin, String imageUrl) {
         this.name = name;
         this.description = description;
         this.role = role;
         this.origin = origin;
+        this.imageUrl = imageUrl;
     }
 
     public Long getCharacterId() {
@@ -71,5 +73,13 @@ public class ValorantCharacter {
 
     public void setOrigin(String origin) {
         this.origin = origin;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

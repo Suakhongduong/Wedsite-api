@@ -1,0 +1,58 @@
+body {
+    background-color: #0f1923;
+    color: #ece8e1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background-color: #111111 !important;
+    border-bottom: 2px solid #ff4655;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #ff4655 !important;
+}
+
+.nav-link {
+    color: #ece8e1 !important;
+}
+
+.nav-link.active {
+    color: #ff4655 !important;
+    font-weight: bold;
+}
+
+.character-card {
+    background-color: #1f2326;
+    border: 1px solid #36393e;
+    color: #ffffff;
+    transition: transform 0.2s ease-in-out;
+}
+
+.character-card:hover {
+    transform: translateY(-5px);
+    border-color: #ff4655;
+}
+
+.character-card img {
+    height: 300px;
+    object-fit: cover;
+    background-color: #111;
+}
+
+.btn-primary {
+    background-color: #ff4655;
+    border-color: #ff4655;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #d93845;
+    border-color: #d93845;
+}
+
+.badge-duelist { background-color: #ff4655; color: white; }
+.badge-initiator { background-color: #17a2b8; color: white; }
+.badge-sentinel { background-color: #28a745; color: white; }
+.badge-controller { background-color: #6c757d; color: white; }
